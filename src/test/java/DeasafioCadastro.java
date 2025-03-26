@@ -11,6 +11,7 @@ public class DeasafioCadastro {
 
     private WebDriver driver;
     private DSL dsl;
+    private CampoTreinamentoPage page;
     private final String URL = "file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html";
 
     @Before
@@ -19,6 +20,7 @@ public class DeasafioCadastro {
         driver.manage().window().setSize(new Dimension(1200,765));
         driver.get(URL);
         dsl = new DSL(driver);
+        page = new CampoTreinamentoPage(driver);
     }
 
     @After
@@ -29,20 +31,20 @@ public class DeasafioCadastro {
     @Test
     public void testeCadastro (){
 
-        dsl.escrever("elementosForm:nome", "Vinícius");
-        dsl.escrever("elementosForm:sobrenome", "Lourenço");
-        dsl.clicarRadio("elementosForm:sexo:0");
-        dsl.clicarRadio("elementosForm:comidaFavorita:2");
-        dsl.selecionarCombo("elementosForm:escolaridade", "Superior");
-        dsl.selecionarCombo("elementosForm:esportes", "Futebol");
-        dsl.clicarBotao("elementosForm:cadastrar");
+        page.setNome("Vinícius");
+        page.setSobrenome("Lourenço");
+        page.setSexoMasculino();
+        page.setComidaPizza();
+        page.setEscolaridade("Superior");
+        page.setEsporte("Futebol");
+        page.cadastrar();
 
-        Assert.assertTrue(dsl.obterTexto("resultado").startsWith("Cadastrado!"));
-        Assert.assertTrue(dsl.obterTexto("descNome").endsWith("Vinícius"));
-        Assert.assertEquals("Sobrenome: Lourenço", dsl.obterTexto("descSobrenome"));
-        Assert.assertEquals("Sexo: Masculino", dsl.obterTexto("descSexo"));
-        Assert.assertEquals("Comida: Pizza", dsl.obterTexto("descComida"));
-        Assert.assertEquals("Escolaridade: superior", dsl.obterTexto("descEscolaridade"));
-        Assert.assertEquals("Esportes: Futebol", dsl.obterTexto("descEsportes"));
+        Assert.assertTrue(page.obterResultadoCadastro().startsWith("Cadastrado!"));
+        Assert.assertTrue(page.obterNomeCadastro().endsWith("Vinícius"));
+        Assert.assertEquals("Sobrenome: Lourenço", page.obterSobrenomeomeCadastro());
+        Assert.assertEquals("Sexo: Masculino", page.obterSexoCadastro());
+        Assert.assertEquals("Comida: Pizza", page.obterComidaCadastro());
+        Assert.assertEquals("Escolaridade: superior", page.obterEscolaridadeCadastro());
+        Assert.assertEquals("Esportes: Futebol", page.obterEsporteCadastro());
     }
 }
