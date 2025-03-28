@@ -15,6 +15,7 @@ public class TesteCampoTreinamento {
 
     private WebDriver driver;
     private DSL dsl;
+    private CampoTreinamentoPage page;
     private final String URL = "file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html"; //URL
 
     @Before
@@ -23,6 +24,7 @@ public class TesteCampoTreinamento {
         driver.manage().window().setSize(new Dimension(1200, 765));
         driver.get(URL);
         dsl = new DSL(driver);
+        page = new CampoTreinamentoPage(driver);
     }
 
     @After
@@ -32,41 +34,41 @@ public class TesteCampoTreinamento {
 
     @Test
     public void testeTextField() {
-        dsl.escrever("elementosForm:nome", "Teste de escrita");
-        Assert.assertEquals("Teste de escrita", dsl.obterValorCampo("elementosForm:nome"));
+        page.setNome("Teste de escrita");
+        Assert.assertEquals("Teste de escrita", page.obterValorCampoNome());
     }
 
     @Test
     public void testTextFieldDuplo() {
-        dsl.escrever("elementosForm:nome", "Vinicius");
-        Assert.assertEquals("Vinicius", dsl.obterValorCampo("elementosForm:nome"));
-        dsl.escrever("elementosForm:nome", "Lourenço");
-        Assert.assertEquals("Lourenço", dsl.obterValorCampo("elementosForm:nome"));
+        page.setNome("Vinicius");
+        Assert.assertEquals("Vinicius", page.obterValorCampoNome());
+        page.setSobrenome("Lourenço");
+        Assert.assertEquals("Lourenço", page.obterValorCampoSobrenome());
 
     }
 
     @Test
     public void testeTextArea() {
-        dsl.escrever("elementosForm:sugestoes", "Teste TextArea\n\nTeste linha\nÚltima linha");
-        Assert.assertEquals("Teste TextArea\n\nTeste linha\nÚltima linha", dsl.obterValorCampo("elementosForm:sugestoes"));
+        page.setSugestoes("Teste TextArea\n\nTeste linha\nÚltima linha");
+        Assert.assertEquals("Teste TextArea\n\nTeste linha\nÚltima linha", page.obterValorCampoSugestoes());
     }
 
     @Test
     public void testeRadioButton() {
-        dsl.clicarRadio("elementosForm:sexo:0");
-        Assert.assertTrue(dsl.isRadioMarcado("elementosForm:sexo:0"));
+        page.setSexoMasculino();
+        Assert.assertTrue(page.obterRadioButtonMasculino());
     }
 
     @Test
     public void testeCheckBox() {
-        dsl.clicarChecbox("elementosForm:comidaFavorita:2");
-        Assert.assertTrue(dsl.isCheckboxMarcado("elementosForm:comidaFavorita:2"));
+        page.setComidaPizza();
+        Assert.assertTrue(page.obterValorCheckboxPizza());
     }
 
     @Test
     public void testeCombo() {
-        dsl.selecionarCombo("elementosForm:escolaridade", "2o grau completo");
-        Assert.assertEquals("2o grau completo", dsl.obterValorCombo("elementosForm:escolaridade"));
+        page.setEscolaridade("2o grau completo");
+        Assert.assertEquals("2o grau completo", page.obterValorCampoEscolaridade());
     }
 
     @Test
@@ -87,9 +89,7 @@ public class TesteCampoTreinamento {
 
     @Test
     public void testeComboMultiplaEscolha() {
-        dsl.selecionarCombo("elementosForm:esportes", "Natacao");
-        dsl.selecionarCombo("elementosForm:esportes", "Corrida");
-        dsl.selecionarCombo("elementosForm:esportes", "O que eh esporte?");
+        page.setEsporte("Natacao", "Corrida", "O que eh esporte?");
 
         WebElement element = driver.findElement(By.id("elementosForm:esportes"));
         Select combo = new Select(element);
@@ -104,14 +104,14 @@ public class TesteCampoTreinamento {
 
     @Test
     public void testeInteragirComBotao() {
-        dsl.clicarBotao("buttonSimple");
+        page.botaoSimples();
         WebElement botao = driver.findElement(By.id("buttonSimple"));
         Assert.assertEquals("Obrigado!", botao.getAttribute("value"));
     }
 
     @Test
     public void testeLink() {
-        dsl.clicarLink("Voltar");
+        page.clicarLink();
         // Assert.assertEquals("Voltou!", dsl.obterTexto("resultado"));
     }
 

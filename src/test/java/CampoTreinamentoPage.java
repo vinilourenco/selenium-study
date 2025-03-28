@@ -45,8 +45,20 @@ public class CampoTreinamentoPage {
             dsl.selecionarCombo("elementosForm:esportes", valor);
     }
 
+    public void setSugestoes(String texto) {
+        dsl.escrever("elementosForm:sugestoes", texto);
+    }
+
     public void cadastrar() {
         dsl.clicarBotao("elementosForm:cadastrar");
+    }
+
+    public void botaoSimples() {
+        dsl.clicarBotao("buttonSimples");
+    }
+
+    public void clicarLink() {
+        dsl.clicarLink("Voltar");
     }
 
     public String obterResultadoCadastro() {
@@ -75,5 +87,33 @@ public class CampoTreinamentoPage {
 
     public String obterEsporteCadastro() {
         return dsl.obterTexto("descEsportes");
+    }
+
+    public String obterValorCampoNome() {
+        return dsl.obterValorCampo("elementosForm:nome");
+    }
+
+    public String obterValorCampoSobrenome() {
+        return dsl.obterValorCampo("elementosForm:sobrenome");
+    }
+
+    public String obterValorCampoSugestoes() {
+        return dsl.obterValorCampo("elementosForm:sugestoes");
+    }
+
+    public boolean obterRadioButtonMasculino() {
+        return dsl.isRadioMarcado("elementosForm:sexo:0");
+    }
+
+    public boolean obterRadioButtonFeminino() {
+        return dsl.isRadioMarcado("elementosForm:sexo:1");
+    }
+
+    public boolean obterValorCheckboxPizza() {
+        return dsl.isCheckboxMarcado("elementosForm:comidaFavorita:2");
+    }
+
+    public String obterValorCampoEscolaridade() {
+        return dsl.obterValorCombo("elementosForm:escolaridade");
     }
 }
