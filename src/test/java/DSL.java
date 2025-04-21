@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -76,5 +77,12 @@ public class DSL {
     public String obterClassName(String className) {
         WebElement element = driver.findElement(By.className(className));
         return element.getText();  // Retorna o texto do elemento
+    }
+
+    /************** JS **************/
+
+    public Object executarJS(String cmd, Object... param) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        return js.executeScript(cmd, param);
     }
 }
