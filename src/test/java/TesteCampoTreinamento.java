@@ -2,10 +2,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -29,7 +26,7 @@ public class TesteCampoTreinamento {
 
     @After
     public void finaliza() {
-        driver.quit();
+//        driver.quit();
     }
 
     @Test
@@ -119,5 +116,16 @@ public class TesteCampoTreinamento {
     public void testeBuscarTextosNaPagina() {
         Assert.assertEquals("Campo de Treinamento", dsl.obterTagName("h3"));
         Assert.assertEquals("Cuidado onde clica, muitas armadilhas...", dsl.obterClassName("facilAchar"));
+    }
+
+    @Test
+    public void testeJavascript() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("alert('Testando js via selenium')");
+        js.executeScript("document.getElementById('elementosForm:nome').value = 'Escrito via js'");
+        js.executeScript("document.getElementById('elementosForm:sobrenome').type = 'radio'");
+
+        WebElement element = driver.findElement(By.id("elementosForm:nome"));
+        js.executeScript("arguments[0].style.border = arguments[1]", element, "solid 4px red");
     }
 }
