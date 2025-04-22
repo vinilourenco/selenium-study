@@ -54,7 +54,7 @@ public class CampoTreinamentoPage {
     }
 
     public void botaoSimples() {
-        dsl.clicarBotao("buttonSimples");
+        dsl.clicarBotao("buttonSimple");
     }
 
     public void clicarLink() {
