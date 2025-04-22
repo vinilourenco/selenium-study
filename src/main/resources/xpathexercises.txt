@@ -1,0 +1,13 @@
+1. Textfield: Nome -> //input[@id='elementosForm:nome']
+
+2. Radio: Sexo Feminino (sem usar id) -> //*[@name='elementosForm:sexo' and @value='F']
+
+3. Label "Pizza" (sem busca de texto) -> //*[@id='elementosForm:comidaFavorita:2']/following-sibling::label
+
+4. "Usuario B" da tabela sem header -> //table[@id='tabelaSemJSF']//td[.='Usuario B']
+
+5. Botão do elemento cujo nome é "Maria" -> //*[@id='elementosForm:tableUsuarios']//td[.='Maria']/../input[@type='button']
+
+6. Radio do elemento cujo nome e escolaridade seja "Doutorado" -> //*[@id='elementosForm:tableUsuarios']//td[1][.='Doutorado']/../td[2][.='Doutorado']/..//input[@type='radio']
+
+7. Textfield do segundo elemento com escolaridade "Superior" -> //*[@id='elementosForm:tableUsuarios']//td[1][.='Doutorado']/../td[2][.='Doutorado']/..//input[@type='radio']
