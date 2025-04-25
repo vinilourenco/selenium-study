@@ -85,6 +85,13 @@ public class DSL {
         return element.getText();  // Retorna o texto do elemento
     }
 
+    /************** Combo **************/
+
+    public void selecionarComboPrime(String radical, String valor) {
+        clicarRadio(By.xpath("//*[@id='"+radical+"_input']/../..//span[@id='"+radical+"_label']"));
+        clicarRadio(By.xpath("//*[@id='"+radical+"_items']//li[.='"+valor+"']"));
+    }
+
     /************** JS **************/
 
     public Object executarJS(String cmd, Object... param) {
