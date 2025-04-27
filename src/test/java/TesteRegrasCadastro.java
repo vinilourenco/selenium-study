@@ -6,18 +6,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import static br.sp.vinilourenco.core.DriverFactory.*;
+
 @RunWith(Parameterized.class)
 public class TesteRegrasCadastro {
 
-    private WebDriver driver;
     private DSL dsl;
     private CampoTreinamentoPage page;
 
@@ -37,16 +35,14 @@ public class TesteRegrasCadastro {
 
     @Before
     public void inicializa() {
-        driver = new ChromeDriver();
-        driver.manage().window().setSize(new Dimension(1200, 765));
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-        dsl = new DSL(driver);
-        page = new CampoTreinamentoPage(driver);
+        getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        dsl = new DSL();
+        page = new CampoTreinamentoPage();
     }
 
     @After
     public void finaliza() {
-        driver.quit();
+        killDriver();
     }
 
     @Parameterized.Parameters
@@ -75,7 +71,7 @@ public class TesteRegrasCadastro {
         if (comidas.contains("Vegetariano")) page.setComidaVegetariano();
         page.setEsporte(esportes);
         page.cadastrar();
-        Alert alert = driver.switchTo().alert();
+        Alert alert = getDriver().switchTo().alert();
         System.out.println(msg);
         Assert.assertEquals(msg, alert.getText());
     }

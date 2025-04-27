@@ -8,17 +8,13 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
+import static br.sp.vinilourenco.core.DriverFactory.*;
+
 public class DSL {
 
-    private WebDriver driver;
-
-    public DSL(WebDriver driver) {
-        this.driver = driver;
-    }
-
     public void escrever(By by, String texto) {
-        driver.findElement(by).clear();
-        driver.findElement(by).sendKeys(texto);
+        getDriver().findElement(by).clear();
+        getDriver().findElement(by).sendKeys(texto);
     }
 
     public void escrever(String id_campo, String texto) {
@@ -26,11 +22,11 @@ public class DSL {
     }
 
     public String obterValorCampo(String id_campo) {
-        return driver.findElement(By.id(id_campo)).getAttribute("value");
+        return getDriver().findElement(By.id(id_campo)).getAttribute("value");
     }
 
     public void clicarRadio(By by) {
-        driver.findElement(by).click();
+        getDriver().findElement(by).click();
     }
 
     public void clicarRadio(String id) {
@@ -38,39 +34,39 @@ public class DSL {
     }
 
     public boolean isRadioMarcado(String id) {
-        return driver.findElement(By.id(id)).isSelected();
+        return getDriver().findElement(By.id(id)).isSelected();
     }
 
     public void clicarChecbox(String id) {
-        driver.findElement(By.id(id)).click();
+        getDriver().findElement(By.id(id)).click();
     }
 
     public boolean isCheckboxMarcado(String id) {
-        return driver.findElement(By.id(id)).isSelected();
+        return getDriver().findElement(By.id(id)).isSelected();
     }
 
     public void selecionarCombo(String id, String valor) {
-        WebElement element = driver.findElement(By.id(id));
+        WebElement element = getDriver().findElement(By.id(id));
         Select combo = new Select(element);
         combo.selectByVisibleText(valor);
     }
 
     public String obterValorCombo(String id) {
-        WebElement element = driver.findElement(By.id(id));
+        WebElement element = getDriver().findElement(By.id(id));
         Select combo = new Select(element);
         return combo.getFirstSelectedOption().getText();
     }
 
     public void clicarBotao(String id) {
-        driver.findElement(By.id(id)).click();
+        getDriver().findElement(By.id(id)).click();
     }
 
     public void clicarLink(String id) {
-        driver.findElement(By.linkText(id)).click();
+        getDriver().findElement(By.linkText(id)).click();
     }
 
     public String obterTexto(By by) {
-        return driver.findElement(by).getText();
+        return getDriver().findElement(by).getText();
     }
 
     public String obterTexto(String id) {
@@ -78,12 +74,12 @@ public class DSL {
     }
 
     public String obterTagName(String tagName) {
-        WebElement element = driver.findElement(By.tagName(tagName));
+        WebElement element = getDriver().findElement(By.tagName(tagName));
         return element.getText();  // Retorna o texto do elemento
     }
 
     public String obterClassName(String className) {
-        WebElement element = driver.findElement(By.className(className));
+        WebElement element = getDriver().findElement(By.className(className));
         return element.getText();  // Retorna o texto do elemento
     }
 
@@ -97,14 +93,14 @@ public class DSL {
     /************** JS **************/
 
     public Object executarJS(String cmd, Object... param) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
         return js.executeScript(cmd, param);
     }
 
     /************** Tabela **************/
     public void clicarBotaoTabela(String colunaBusca, String valor, String colunaBotao, String idTabela) {
         //procurar coluna do registro
-        WebElement tabela = driver.findElement(By.xpath("//*[@id='elementosForm:tableUsuarios']"));
+        WebElement tabela = getDriver().findElement(By.xpath("//*[@id='elementosForm:tableUsuarios']"));
         int idColuna = obterIndiceColuna(colunaBusca, tabela);
 
         //encontrar linha do registro

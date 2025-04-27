@@ -1,42 +1,43 @@
+import br.sp.vinilourenco.core.DSL;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import static br.sp.vinilourenco.core.DriverFactory.*;
+import static br.sp.vinilourenco.core.DriverFactory.getDriver;
 
 public class TesteAlert {
 
-    private WebDriver driver;
+    private DSL dsl;
 
     @Before
     public void inicializa() {
-        driver.manage().window().setSize(new Dimension(1300, 765));
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        dsl = new DSL();
     }
 
     @After
     public void finaliza() {
-        driver.quit();
+        killDriver();
     }
 
     @Test
     public void testeAlertSimples() {
-        driver.findElement(By.id("alert")).click();
-        Alert alert = driver.switchTo().alert();
+        getDriver().findElement(By.id("alert")).click();
+        Alert alert = getDriver().switchTo().alert();
         String texto = alert.getText();
         Assert.assertEquals("Alert Simples", texto);
         alert.accept();
-        driver.findElement(By.id("elementosForm:nome")).sendKeys(texto);
+        getDriver().findElement(By.id("elementosForm:nome")).sendKeys(texto);
     }
 
     @Test
     public void testeAlertConfirmado() {
-        driver.findElement(By.id("confirm")).click();
-        Alert alert = driver.switchTo().alert();
+        getDriver().findElement(By.id("confirm")).click();
+        Alert alert = getDriver().switchTo().alert();
         String texto = alert.getText();
         Assert.assertEquals("Confirm Simples", texto);
         alert.accept();
@@ -47,8 +48,8 @@ public class TesteAlert {
 
     @Test
     public void testeAlertCancelado() {
-        driver.findElement(By.id("confirm")).click();
-        Alert alert = driver.switchTo().alert();
+        getDriver().findElement(By.id("confirm")).click();
+        Alert alert = getDriver().switchTo().alert();
         String texto = alert.getText();
         Assert.assertEquals("Confirm Simples", texto);
         alert.dismiss();
@@ -59,8 +60,8 @@ public class TesteAlert {
 
     @Test
     public void testePrompt () {
-        driver.findElement(By.id("prompt")).click();
-        Alert alert = driver.switchTo().alert();
+        getDriver().findElement(By.id("prompt")).click();
+        Alert alert = getDriver().switchTo().alert();
         Assert.assertEquals("Digite um numero", alert.getText());
         alert.sendKeys("12");
         alert.accept();

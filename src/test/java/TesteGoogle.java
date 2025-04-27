@@ -1,3 +1,4 @@
+import br.sp.vinilourenco.core.DriverFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -6,25 +7,23 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TesteGoogle {
+import static br.sp.vinilourenco.core.DriverFactory.*;
 
-    private WebDriver driver;
+public class TesteGoogle {
 
     @Before
     public void inicializa() {
         System.setProperty("webdriver.chrome.driver", "C:/Users/vinicius/Desktop/Automações de Teste/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().setSize(new Dimension(1200, 765));
-        driver.get("http://www.google.com");
+        getDriver().get("http://www.google.com");
     }
 
     @After
     public void finaliza() {
-        driver.quit();
+        killDriver();
     }
 
     @Test
     public void teste() {
-        Assert.assertEquals("Google", driver.getTitle());
+        Assert.assertEquals("Google", getDriver().getTitle());
     }
 }

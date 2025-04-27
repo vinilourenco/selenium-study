@@ -4,34 +4,30 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import static br.sp.vinilourenco.core.DriverFactory.*;
 
 public class DesafioRegrasDeNegocio {
 
-    private WebDriver driver;
     private DSL dsl;
     private CampoTreinamentoPage page;
 
     @Before
     public void inicializa() {
-        driver = new ChromeDriver();
-        driver.manage().window().setSize(new Dimension(1200, 765));
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-        dsl = new DSL(driver);
-        page = new CampoTreinamentoPage(driver);
+        getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+        dsl = new DSL();
+        page = new CampoTreinamentoPage();
     }
 
     @After
     public void finaliza() {
-        driver.quit();
+        killDriver();
     }
 
     @Test
     public void testeCampoNomeObrigatorio() {
         page.cadastrar();
-        Alert alert = driver.switchTo().alert();
+        Alert alert = getDriver().switchTo().alert();
         Assert.assertEquals("Nome eh obrigatorio", alert.getText());
     }
 
@@ -39,7 +35,7 @@ public class DesafioRegrasDeNegocio {
     public void testeCampoSobrenomeObrigatorio() {
         page.setNome("Nome");
         page.cadastrar();
-        Alert alert = driver.switchTo().alert();
+        Alert alert = getDriver().switchTo().alert();
         Assert.assertEquals("Sobrenome eh obrigatorio", alert.getText());
     }
 
@@ -48,7 +44,7 @@ public class DesafioRegrasDeNegocio {
         page.setNome("Nome");
         page.setSobrenome("Sobrenome");
         page.cadastrar();
-        Alert alert = driver.switchTo().alert();
+        Alert alert = getDriver().switchTo().alert();
         Assert.assertEquals("Sexo eh obrigatorio", alert.getText());
     }
 
@@ -60,7 +56,7 @@ public class DesafioRegrasDeNegocio {
         page.setComidaCarne();
         page.setComidaVegetariano();
         page.cadastrar();
-        Alert alert = driver.switchTo().alert();
+        Alert alert = getDriver().switchTo().alert();
         Assert.assertEquals("Tem certeza que voce eh vegetariano?", alert.getText());
     }
 
@@ -72,7 +68,7 @@ public class DesafioRegrasDeNegocio {
         page.setComidaCarne();
         page.setEsporte("Futebol", "O que eh esporte?");
         page.cadastrar();
-        Alert alert = driver.switchTo().alert();
+        Alert alert = getDriver().switchTo().alert();
         Assert.assertEquals("Voce faz esporte ou nao?", alert.getText());
     }
 }
