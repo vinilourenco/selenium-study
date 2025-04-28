@@ -1,3 +1,5 @@
+package br.sp.vinilourenco.test;
+
 import br.sp.vinilourenco.core.DSL;
 import org.junit.After;
 import org.junit.Before;

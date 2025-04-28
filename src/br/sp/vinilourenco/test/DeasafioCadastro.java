@@ -1,3 +1,5 @@
+package br.sp.vinilourenco.test;
+
 import static br.sp.vinilourenco.core.DriverFactory.*;
 import static br.sp.vinilourenco.core.DriverFactory.getDriver;
 
