@@ -1,8 +1,6 @@
 package br.sp.vinilourenco.suites;
 
-import br.sp.vinilourenco.core.DriverFactory;
-import br.sp.vinilourenco.test.DesafioRegrasDeNegocio;
-import br.sp.vinilourenco.test.TesteCampoTreinamento;
+import br.sp.vinilourenco.test.DesafioCadastro;
 import br.sp.vinilourenco.test.TesteRegrasCadastro;
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
@@ -12,8 +10,7 @@ import static br.sp.vinilourenco.core.DriverFactory.*;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-       DesafioRegrasDeNegocio.class,
-       TesteCampoTreinamento.class,
+       DesafioCadastro.class,
        TesteRegrasCadastro.class
 })
 public class SuiteTeste {
@@ -22,5 +19,4 @@ public class SuiteTeste {
     public static void finalizaTudo() {
         killDriver();
     }
-
 }
