@@ -3,6 +3,7 @@ package br.sp.vinilourenco.test;
 import static br.sp.vinilourenco.core.DriverFactory.*;
 import static br.sp.vinilourenco.core.DriverFactory.getDriver;
 
+import br.sp.vinilourenco.page.CampoTreinamentoPage;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

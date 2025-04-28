@@ -1,6 +1,7 @@
 package br.sp.vinilourenco.test;
 
 import br.sp.vinilourenco.core.DSL;
+import br.sp.vinilourenco.page.CampoTreinamentoPage;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
