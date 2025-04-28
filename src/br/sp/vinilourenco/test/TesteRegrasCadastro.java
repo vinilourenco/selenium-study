@@ -72,5 +72,6 @@ public class TesteRegrasCadastro extends BaseTest {
         Alert alert = getDriver().switchTo().alert();
         System.out.println(msg);
         Assert.assertEquals(msg, alert.getText());
+        alert.accept();
     }
 }
