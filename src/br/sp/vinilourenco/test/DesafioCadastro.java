@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DeasafioCadastro extends BaseTest {
+public class DesafioCadastro extends BaseTest {
 
     private CampoTreinamentoPage page;
     private final String URL = "file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html";
