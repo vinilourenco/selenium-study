@@ -1,15 +1,9 @@
 package br.sp.vinilourenco.page;
 
-import br.sp.vinilourenco.core.DSL;
+import br.sp.vinilourenco.core.BasePage;
 import org.openqa.selenium.By;
 
-public class CampoTreinamentoPage {
-
-    private DSL dsl;
-
-    public CampoTreinamentoPage() {
-        dsl = new DSL();
-    }
+public class CampoTreinamentoPage extends BasePage {
 
     public void setNome(String nome){
         dsl.escrever("elementosForm:nome", nome);
