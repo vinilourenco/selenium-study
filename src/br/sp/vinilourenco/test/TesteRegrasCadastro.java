@@ -1,8 +1,8 @@
 package br.sp.vinilourenco.test;
 
+import br.sp.vinilourenco.core.BaseTest;
 import br.sp.vinilourenco.core.DSL;
 import br.sp.vinilourenco.page.CampoTreinamentoPage;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ import java.util.List;
 import static br.sp.vinilourenco.core.DriverFactory.*;
 
 @RunWith(Parameterized.class)
-public class TesteRegrasCadastro {
+public class TesteRegrasCadastro extends BaseTest {
 
     private DSL dsl;
     private CampoTreinamentoPage page;
@@ -41,11 +41,6 @@ public class TesteRegrasCadastro {
         getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
         dsl = new DSL();
         page = new CampoTreinamentoPage();
-    }
-
-    @After
-    public void finaliza() {
-        killDriver();
     }
 
     @Parameterized.Parameters

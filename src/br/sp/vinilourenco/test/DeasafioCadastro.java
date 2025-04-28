@@ -1,15 +1,14 @@
 package br.sp.vinilourenco.test;
 
-import static br.sp.vinilourenco.core.DriverFactory.*;
 import static br.sp.vinilourenco.core.DriverFactory.getDriver;
 
+import br.sp.vinilourenco.core.BaseTest;
 import br.sp.vinilourenco.page.CampoTreinamentoPage;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DeasafioCadastro {
+public class DeasafioCadastro extends BaseTest {
 
     private CampoTreinamentoPage page;
     private final String URL = "file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html";
@@ -18,11 +17,6 @@ public class DeasafioCadastro {
     public void inicializa() {
         getDriver().get(URL);
         page = new CampoTreinamentoPage();
-    }
-
-    @After
-    public void finaliza() {
-        killDriver();
     }
 
     @Test
